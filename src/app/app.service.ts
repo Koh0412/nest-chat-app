@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-interface HomeParams {
+export interface HomeParams {
   title: string;
   message: string;
 }
