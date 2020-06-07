@@ -9,7 +9,7 @@ export class UsersController {
 
   @Get()
   async index(): Promise<User[]> {
-    const users = this.userService.fundAll();
+    const users = this.userService.findAll();
     return users;
   }
 
