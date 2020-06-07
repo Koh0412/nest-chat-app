@@ -7,11 +7,15 @@ interface HomeParams {
 
 @Injectable()
 export class AppService {
-  public get params(): HomeParams {
+  get params(): HomeParams {
     const params: HomeParams = {
       title: "TOP",
       message: "hello, world!"
     };
     return params;
+  }
+
+  getHello(): string {
+    return "hello!";
   }
 }

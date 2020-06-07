@@ -1,21 +1,26 @@
-import { Controller, Get, Post, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Get, Post, HttpCode, HttpStatus, Param, Body } from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UsersService } from './users.service';
+import { User } from 'src/users/interfaces/users.interface';
 
 @Controller('users')
 export class UsersController {
+  constructor(private readonly userService: UsersService) {}
 
   @Get()
-  public index(): string {
-    return "this action returns all users";
+  async index(): Promise<User[]> {
+    const users = this.userService.fundAll();
+    return users;
   }
 
   @Get(":id")
-  public show(@Param("id") id: string): string {
+  show(@Param("id") id: string): string {
     return `this action return user id: ${id}`;
   }
 
   @Post()
   @HttpCode(HttpStatus.NO_CONTENT)
-  public create(): string {
-    return "this action add new user";
+  async create(@Body() createUserDto: CreateUserDto): Promise<void> {
+    this.userService.create(createUserDto);
   }
 }

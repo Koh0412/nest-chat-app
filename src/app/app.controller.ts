@@ -10,4 +10,8 @@ export class AppController {
   index(@Res() res: Response): void {
     return res.render(this.index.name, this.appService.params);
   }
+
+  getHello(): string {
+    return this.appService.getHello();
+  }
 }
