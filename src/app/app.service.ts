@@ -1,21 +1,4 @@
 import { Injectable } from '@nestjs/common';
 
-export interface HomeParams {
-  title: string;
-  message: string;
-}
-
 @Injectable()
-export class AppService {
-  get params(): HomeParams {
-    const params: HomeParams = {
-      title: "TOP",
-      message: "hello, world!"
-    };
-    return params;
-  }
-
-  getHello(): string {
-    return "hello!";
-  }
-}
+export class AppService {}

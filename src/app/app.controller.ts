@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService, HomeParams } from './app.service';
-import { View } from 'src/common/index';
+import { AppService } from './app.service';
+import { View } from 'src/common';
 
 @Controller()
 export class AppController {
@@ -8,11 +8,7 @@ export class AppController {
 
   @Get()
   @View("index")
-  index(): HomeParams {
-    return this.appService.params;
-  }
-
-  getHello(): string {
-    return this.appService.getHello();
+  index(): void {
+    //
   }
 }
