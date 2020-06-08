@@ -1,0 +1,22 @@
+<%- include("../layouts/application", { title: "ユーザー一覧" }) %>
+<% users.forEach(user => { %>
+  <div>名前: <%= user.name %></div>
+  <div>年齢: <%= user.age %></div>
+  <div>メール: <%= user.email %></div>
+<% }); %>
+
+<form action="/users" method="post">
+  <div>
+    <label for="user-name">名前</label>
+    <input type="text" name="name" id="user-name">
+  </div>
+  <div>
+    <label for="user-age">年齢</label>
+    <input type="number" name="age" id="user-age">
+  </div>
+  <div>
+    <label for="user-email">メールアドレス</label>
+    <input type="email" name="email" id="user-email">
+  </div>
+  <input type="submit" value="送信">
+</form>

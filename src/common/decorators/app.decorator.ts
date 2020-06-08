@@ -1,5 +1,5 @@
 /** 全体で使うdecoratorの定義ファイル */
-import { SetMetadata, Render } from '@nestjs/common';
+import { SetMetadata, Render, Redirect } from '@nestjs/common';
 
 /**
  * - 指定されたテンプレートを返す, 階層はドットを使用する
@@ -11,3 +11,10 @@ export function View(template: string): MethodDecorator {
   SetMetadata('view', replaceTemplate);
   return Render(replaceTemplate);
 };
+
+/**
+ * rootにリダイレクトする
+ */
+export function RedirectRoot(): MethodDecorator {
+  return Redirect("/");
+}
