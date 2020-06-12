@@ -21,7 +21,9 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migrate": "npx typeorm migration:run",
     "migrate:generate": "npx typeorm migration:generate -d src/migrations -n",
-    "migrate:roolback": "npx typeorm migration:revert"
+    "migrate:rollback": "npx typeorm migration:revert",
+    "scss": "node_modules/.bin/node-sass resources/scss/app.scss public/css/app.css",
+    "scss:dev": "node_modules/.bin/node-sass resources/scss/app.scss public/css/app.css -w"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
@@ -51,13 +53,16 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "jest": "26.0.1",
+    "node-sass": "^4.14.1",
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
     "ts-jest": "26.1.0",
     "ts-loader": "^6.2.1",
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   },
   "jest": {
     "moduleFileExtensions": [
