@@ -5,8 +5,7 @@
     <span>名前: </span>
     <a href="/users/<%= user.id %>"><%= user.name %></a>
   </div>
-  <div>年齢: <%= user.age %></div>
-  <div>メール: <%= user.email %></div>
+  <div>コメント: <%= user.description %></div>
 <% }); %>
 
 <form action="/users" method="post">
@@ -15,12 +14,16 @@
     <input type="text" name="name" id="user-name" required>
   </div>
   <div>
-    <label for="user-age">年齢</label>
-    <input type="number" name="age" id="user-age" required>
-  </div>
-  <div>
     <label for="user-email">メールアドレス</label>
     <input type="email" name="email" id="user-email" required>
+  </div>
+  <div>
+    <label for="user-password">パスワード</label>
+    <input type="password" name="password" id="user-password" required>
+  </div>
+  <div>
+    <label for="user-description">コメント</label>
+    <textarea name="description" id="user-description" required></textarea>
   </div>
   <input type="submit" value="送信">
 </form>
