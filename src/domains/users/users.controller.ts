@@ -12,7 +12,7 @@ export class UsersController {
   @View("users.index")
   async index() {
     const users = await this.userService.all();
-    return { users: users };
+    return { users };
   }
 
   @Get(":id")
@@ -22,12 +22,13 @@ export class UsersController {
     if (!user) {
       throw new HttpException("Not Found", HttpStatus.NOT_FOUND);
     }
-    return { user: user };
+    return { user };
   }
 
   @Post()
   @RedirectRoot()
   async create(@Body() user: User): Promise<InsertResult> {
+    user.password = this.userService.getPasswordHash(user.password, 10);
     return this.userService.create(user);
   }
 }
