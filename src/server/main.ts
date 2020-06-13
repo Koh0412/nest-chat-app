@@ -4,7 +4,7 @@ import { join } from "path";
 import { AppModule } from "./domains/app/app.module";
 import * as nunjucks from "nunjucks";
 import * as helmet from "helmet"
-import { HttpExceptionFilter, AllExceptionFilter } from "./filter";
+import { HttpExceptionFilter, InternalExceptionFilter } from "./filter";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -25,12 +25,13 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, "..", "public"));
   app.setBaseViewsDir(join(__dirname, "..", "views"));
 
-  app.useGlobalFilters(new HttpExceptionFilter, new AllExceptionFilter);
+  app.useGlobalFilters(new HttpExceptionFilter, new InternalExceptionFilter);
 
   const viewEnv = nunjucks.configure("views", nunjucksOptions);
   app.engine("njk", viewEnv.render);
   app.setViewEngine("njk");
 
   await app.listen(3000);
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

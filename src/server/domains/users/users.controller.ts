@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Param, Body, HttpException, HttpStatus, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, HttpException, HttpStatus, ParseIntPipe, BadRequestException } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { User } from 'src/entity/user.entity';
+import { User } from 'src/server/entity/user.entity';
 import { InsertResult } from 'typeorm';
-import { View, RedirectRoot } from 'src/common';
+import { View, RedirectRoot } from 'src/server/common';
 
 @Controller('users')
 export class UsersController {
@@ -29,6 +29,8 @@ export class UsersController {
   @RedirectRoot()
   async create(@Body() user: User): Promise<InsertResult> {
     user.password = this.userService.getPasswordHash(user.password, 10);
-    return this.userService.create(user);
+    return this.userService.create(user).catch(() => {
+      throw new BadRequestException();
+    });
   }
 }
