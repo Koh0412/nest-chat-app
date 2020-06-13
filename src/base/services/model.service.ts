@@ -10,7 +10,7 @@ export class ModelService<T> {
   constructor(@InjectRepository(BaseEntity) private readonly repository: Repository<T>) {}
 
   /**
-   * 与えられたentityをdb内に追加
+   * 与えられたデータをdb内に追加
    *
    * @param data
    */
@@ -19,14 +19,14 @@ export class ModelService<T> {
   }
 
   /**
-   * 全てのentityを返す
+   * 全てのレコードを返す
    */
   async all(): Promise<T[]> {
     return this.repository.find();
   }
 
   /**
-   * 指定したidのentityを取得
+   * 指定したidのレコードを取得
    *
    * @param id
    */
