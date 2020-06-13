@@ -1,0 +1,31 @@
+{% extends "../layouts/application.njk" %}
+{% set title = "ユーザー一覧" %}
+
+{% block contents -%}
+  {%- for user in users %}
+    <div>
+      <span>名前: </span>
+      <a href="/users/{{ user.id }}">{{ user.name }}</a>
+    </div>
+    <div>コメント: {{ user.description }}</div>
+  {%- endfor %}
+  <form action="/users" method="post">
+    <div>
+      <label for="user-name">名前</label>
+      <input type="text" name="name" id="user-name" required>
+    </div>
+    <div>
+      <label for="user-email">メールアドレス</label>
+      <input type="email" name="email" id="user-email" required>
+    </div>
+    <div>
+      <label for="user-password">パスワード</label>
+      <input type="password" name="password" id="user-password" required>
+    </div>
+    <div>
+      <label for="user-description">コメント</label>
+      <textarea name="description" id="user-description" required></textarea>
+    </div>
+    <input type="submit" value="送信">
+  </form>
+{%- endblock %}
