@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, HttpException, HttpStatus, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/entity/user.entity';
 import { InsertResult } from 'typeorm';
@@ -17,7 +17,7 @@ export class UsersController {
 
   @Get(":id")
   @View("users.show")
-  async show(@Param("id") id: string) {
+  async show(@Param("id", ParseIntPipe) id: number) {
     const user = await this.userService.findOne(id);
     if (!user) {
       throw new HttpException("Not Found", HttpStatus.NOT_FOUND);

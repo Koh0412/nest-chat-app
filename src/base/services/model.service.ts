@@ -30,9 +30,9 @@ export class ModelService<T> {
    *
    * @param id
    */
-  async findOne(id: string): Promise<T> {
+  async findOne(id: number): Promise<T> {
     const model = this.repository.findOne({
-      where: { id: parseInt(id, 10) }
+      where: { id }
     });
     return model;
   }

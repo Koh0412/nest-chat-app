@@ -1,0 +1,7 @@
+{% extends "../layouts/application.njk" %}
+{% set title = "Error" %}
+
+{% block contents -%}
+  <div>{{ status }}: Internal Server Error</div>
+  <p>サーバー側でエラーが発生しました</p>
+{%- endblock %}

@@ -1,0 +1,7 @@
+{% extends "../layouts/application.njk" %}
+{% set title = "Error" %}
+
+{% block contents -%}
+  <div>{{ message }}</div>
+  <div>{{ stack }}</div>
+{%- endblock %}
