@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, BaseEntity, InsertResult } from "typeorm";
 
@@ -15,13 +15,15 @@ export class ModelService<T> {
    * @param data
    */
   async create(data: T): Promise<InsertResult> {
-    return this.repository.insert(data);
+    return this.repository.insert(data).catch(() => {
+      throw new BadRequestException();
+    });
   }
 
   /**
    * 全てのレコードを返す
    */
-  async all(): Promise<T[]> {
+  async all(): Promise<T[] | undefined> {
     return this.repository.find();
   }
 
@@ -30,10 +32,21 @@ export class ModelService<T> {
    *
    * @param id
    */
-  async findOne(id: number): Promise<T> {
+  async findOne(id: number): Promise<T | undefined> {
     const model = this.repository.findOne({
       where: { id }
     });
     return model;
+  }
+
+  /**
+   * 指定のカラム名で検索する
+   *
+   * @param params
+   */
+  async findByParams(params: any): Promise<T | undefined> {
+    return this.repository.findOne({
+      where: params
+    });
   }
 }
