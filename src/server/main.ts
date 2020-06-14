@@ -8,7 +8,7 @@ import { HttpExceptionFilter, InternalExceptionFilter } from "./filter";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    // logger: ["error", "warn"]
+    logger: ["error", "warn"]
   });
 
   const nunjucksOptions: nunjucks.ConfigureOptions = {

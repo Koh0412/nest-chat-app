@@ -21,7 +21,7 @@ export class AppController {
   }
 
   @Get("login")
-  @View("login")
+  @View("auth.login")
   getLoginPage() {
     //
   }
