@@ -5,6 +5,9 @@ import { AuthService } from "../auth.service";
 import { UnauthorizedException, Injectable } from "@nestjs/common";
 import { StrategyName } from "src/server/common/constants/const";
 
+/**
+ * we can implement our Passport local authentication strategy
+ */
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, StrategyName.LOCAL) {
   constructor(private readonly authService: AuthService) {

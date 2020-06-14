@@ -1,6 +1,5 @@
-export const SECRET_KEY = "secret";
+export const SESSION_KEY = "Session_Key";
 
 export const StrategyName = {
   LOCAL: "local",
-  JWT: "jwt"
 }

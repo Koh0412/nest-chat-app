@@ -1,11 +1,18 @@
+import { join } from "path";
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import { join } from "path";
-import { AppModule } from "./domains/app/app.module";
+import * as session from 'express-session';
 import * as nunjucks from "nunjucks";
-import * as helmet from "helmet"
-import { HttpExceptionFilter, InternalExceptionFilter } from "./filter";
+import * as helmet from "helmet";
+import flash = require('connect-flash');
+import { AppModule } from "./domains/app/app.module";
+import { HttpExceptionFilter, InternalExceptionFilter } from "./common/filters";
+import * as passport from "passport";
+import { SESSION_KEY } from "./common/constants/const";
 
+/**
+ * 起動設定
+ */
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger: ["error", "warn"]
@@ -30,6 +37,16 @@ async function bootstrap() {
   const viewEnv = nunjucks.configure("views", nunjucksOptions);
   app.engine("njk", viewEnv.render);
   app.setViewEngine("njk");
+
+  app.use(session({
+    secret: SESSION_KEY,
+    resave: false,
+    saveUninitialized: false
+  }));
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
 
   await app.listen(3000);
   console.log(`Application is running on: ${await app.getUrl()}`);

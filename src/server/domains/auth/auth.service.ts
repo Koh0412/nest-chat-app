@@ -1,16 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import * as bcript from "bcrypt";
 import { UsersService } from '../users/users.service';
-import { User } from 'src/server/entity/user.entity';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly userService: UsersService,
-    private readonly jwtService: JwtService
-  ) {}
+  constructor(private readonly userService: UsersService) {}
 
   /**
    * ユーザーの認証チェック
@@ -27,17 +22,5 @@ export class AuthService {
     }
 
     return null;
-  }
-
-  /**
-   * ログイン処理
-   *
-   * @param user
-   */
-  async login(user: User) {
-    const payload = { name: user.name, id: user.id };
-    return {
-        access_token: this.jwtService.sign(payload),
-    };
   }
 }

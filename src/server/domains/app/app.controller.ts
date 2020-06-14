@@ -1,32 +1,32 @@
-import { Controller, Get, UseGuards, Post, Request } from '@nestjs/common';
-import { View } from 'src/server/common';
-import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from '../auth/auth.service';
-import { StrategyName } from 'src/server/common/constants/const';
+import { Controller, Get, UseGuards, Post, Request, UseFilters, Req, Res } from "@nestjs/common";
+import { View } from "src/server/common";
+import { LoginGuard } from "src/server/common/guards/login.guard";
+import { AuthenticateGuard } from "src/server/common/guards/authenticate.guard";
+import { AuthExceptionFilter } from "src/server/common/filters";
+import { Request as ExpressRequest, Response } from "express";
 
 @Controller()
+@UseFilters(AuthExceptionFilter)
 export class AppController {
-  constructor(private readonly authService: AuthService) {}
-
   @Get()
   @View("index")
   index(): void {
     //
   }
 
-  @UseGuards(AuthGuard(StrategyName.LOCAL))
+  @UseGuards(LoginGuard)
   @Post("login")
-  async login(@Request() req: any) {
-    return this.authService.login(req.user)
+  async login(@Res() res: Response) {
+    return res.redirect("/me");
   }
 
   @Get("login")
   @View("auth.login")
-  getLoginPage() {
-    //
+  getLoginPage(@Req() req: ExpressRequest) {
+    return { message: req.flash("loginError") };
   }
 
-  @UseGuards(AuthGuard(StrategyName.JWT))
+  @UseGuards(AuthenticateGuard)
   @Get("me")
   getProfile(@Request() req: any) {
     return req.user;
