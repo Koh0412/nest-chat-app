@@ -15,8 +15,8 @@ export class ModelService<T> {
    * @param data
    */
   async create(data: T): Promise<InsertResult> {
-    return this.repository.insert(data).catch(() => {
-      throw new BadRequestException();
+    return this.repository.insert(data).catch((err) => {
+      throw new BadRequestException(err);
     });
   }
 

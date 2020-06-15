@@ -1,13 +1,16 @@
 import { join } from "path";
+
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
+import { ValidationPipe } from "@nestjs/common";
 import * as session from 'express-session';
 import * as nunjucks from "nunjucks";
 import * as helmet from "helmet";
+import * as passport from "passport";
 import flash = require('connect-flash');
+
 import { AppModule } from "./domains/app/app.module";
 import { HttpExceptionFilter, InternalExceptionFilter } from "./common/filters";
-import * as passport from "passport";
 import { SESSION_KEY } from "./common/constants/const";
 
 /**
@@ -32,6 +35,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, "..", "public"));
   app.setBaseViewsDir(join(__dirname, "..", "views"));
 
+  app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter, new InternalExceptionFilter);
 
   const viewEnv = nunjucks.configure("views", nunjucksOptions);

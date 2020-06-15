@@ -20,7 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migrate": "npx typeorm migration:run",
-    "migrate:generate": "npx typeorm migration:generate -d src/migrations -n",
+    "migrate:generate": "npx typeorm migration:generate -d src/server/migrations -n",
     "migrate:rollback": "npx typeorm migration:revert",
     "scss": "node_modules/.bin/node-sass resources/scss/app.scss public/css/app.css",
     "scss:dev": "node_modules/.bin/node-sass resources/scss/app.scss public/css/app.css -w"
@@ -32,6 +32,8 @@
     "@nestjs/passport": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/typeorm": "^7.1.0",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
     "connect-flash": "^0.1.1",
     "express-session": "^1.17.1",
     "helmet": "^3.23.0",
