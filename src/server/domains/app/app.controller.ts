@@ -1,7 +1,6 @@
 import { Controller, Get, UseGuards, Post, Request, UseFilters, Req, Res } from "@nestjs/common";
-import { View } from "src/server/common";
-import { LoginGuard } from "src/server/common/guards/login.guard";
-import { AuthenticateGuard } from "src/server/common/guards/authenticate.guard";
+import { View, AuthGet } from "src/server/common/decorators";
+import { LoginGuard } from "src/server/common/guards";
 import { AuthExceptionFilter } from "src/server/common/filters";
 import { Request as ExpressRequest, Response } from "express";
 
@@ -26,8 +25,7 @@ export class AppController {
     return { message: req.flash("loginError") };
   }
 
-  @UseGuards(AuthenticateGuard)
-  @Get("me")
+  @AuthGet("me")
   getProfile(@Request() req: any) {
     return req.user;
   }

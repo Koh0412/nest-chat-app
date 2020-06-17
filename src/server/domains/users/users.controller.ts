@@ -2,7 +2,7 @@ import { Controller, Get, Post, Param, Body, HttpException, HttpStatus, ParseInt
 import { UsersService } from './users.service';
 import { User } from 'src/server/entity/user.entity';
 import { InsertResult } from 'typeorm';
-import { View, RedirectRoot } from 'src/server/common';
+import { View, RedirectRoot } from 'src/server/common/decorators';
 
 @Controller('users')
 export class UsersController {
