@@ -10,7 +10,7 @@ import * as passport from "passport";
 import flash = require('connect-flash');
 
 import { AppModule } from "./domains/app/app.module";
-import { HttpExceptionFilter, InternalExceptionFilter } from "./common/filters";
+import { HttpExceptionFilter, InternalExceptionFilter } from "./handlers/filters";
 import { SESSION_KEY } from "./common/constants/const";
 
 /**

@@ -1,6 +1,6 @@
 /** 全体で使うdecoratorの定義ファイル */
 import { SetMetadata, Render, Redirect, Get, UseGuards, applyDecorators } from "@nestjs/common";
-import { AuthenticateGuard } from "../guards/authenticate.guard";
+import { AuthenticateGuard } from "../../handlers/guards/authenticate.guard";
 
 /**
  * - 指定されたテンプレートを返す, 階層はドットを使用する

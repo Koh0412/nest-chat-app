@@ -1,7 +1,7 @@
 import { Controller, Get, UseGuards, Post, Request, UseFilters, Req, Res } from "@nestjs/common";
 import { View, AuthGet } from "src/server/common/decorators";
-import { LoginGuard } from "src/server/common/guards";
-import { AuthExceptionFilter } from "src/server/common/filters";
+import { LoginGuard } from "src/server/handlers/guards";
+import { AuthExceptionFilter } from "src/server/handlers/filters";
 import { Request as ExpressRequest, Response } from "express";
 
 @Controller()

@@ -1,6 +1,6 @@
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { StrategyName } from '../constants/const';
+import { StrategyName } from '../../common/constants/const';
 
 /**
  * ログイン機能のガードクラス
