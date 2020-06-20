@@ -4,8 +4,9 @@
 {% block contents -%}
   <div>message: this is top page</div>
   {{ macro.linkTo("meve page to users", "users") }}
-  <form action="" method="post" id="chat-form">
-    <input type="text" id="chat-input">
+  <form action="/" method="post" id="chat-form">
+    <input type="text" id="chat-input" required>
+    <input type="submit" value="送信" id="chat-send-btn">
   </form>
   <div id="res"></div>
 {%- endblock %}
